@@ -1,3 +1,4 @@
+import 'package:awas_app/widgets/bottom_bar_widget.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatelessWidget {
@@ -8,6 +9,7 @@ class Home extends StatelessWidget {
     final theme = Theme.of(context);
 
     return Scaffold(
+      bottomNavigationBar: BottomBarWidget(),
       appBar: AppBar(
         title: const Text('Inicio'),
         centerTitle: true,
