@@ -48,8 +48,9 @@ class _BottomBarWidgetState extends State<BottomBarWidget> {
           selectedItemColor: Theme.of(context).primaryColor,
           unselectedItemColor: Colors.blueGrey,
           items: const <BottomNavigationBarItem>[
-            BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-            BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
+            BottomNavigationBarItem(icon: Icon(Icons.home_filled), label: 'Home'),
+            BottomNavigationBarItem(icon: Icon(Icons.notifications_rounded), label: 'Alertas'),
+            BottomNavigationBarItem(icon: Icon(Icons.bar_chart), label: 'analytics'),
             BottomNavigationBarItem(
               icon: Icon(Icons.settings),
               label: 'Settings',
