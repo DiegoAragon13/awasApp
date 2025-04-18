@@ -1,5 +1,6 @@
-import 'package:awas_app/widgets/bottom_bar_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:awas_app/widgets/app_bar_widget.dart';
+import 'package:awas_app/widgets/bottom_bar_widget.dart';
 
 class Home extends StatelessWidget {
   const Home({super.key});
@@ -9,13 +10,10 @@ class Home extends StatelessWidget {
     final theme = Theme.of(context);
 
     return Scaffold(
-      bottomNavigationBar: BottomBarWidget(),
-      appBar: AppBar(
-        title: const Text('Inicio'),
-        centerTitle: true,
-        backgroundColor: theme.primaryColor,
-        foregroundColor: Colors.white,
+      appBar: const CustomAppBar(
+        notificationCount: 3, //notficacioens
       ),
+      bottomNavigationBar: BottomBarWidget(),
       body: Center(
         child: Text(
           'Bienvenido a AWAS APP',
