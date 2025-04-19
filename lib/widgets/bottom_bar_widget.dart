@@ -1,63 +1,46 @@
 import 'package:flutter/material.dart';
 
-class BottomBarWidget extends StatefulWidget {
-  const BottomBarWidget({super.key});
+class BottomBarWidget extends StatelessWidget {
+  final int currentIndex;
+  final ValueChanged<int> onTap;
 
-  @override
-  _BottomBarWidgetState createState() => _BottomBarWidgetState();
-}
-
-class _BottomBarWidgetState extends State<BottomBarWidget> {
-  int _selectedIndex = 0;
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
+  const BottomBarWidget({
+    super.key,
+    required this.currentIndex,
+    required this.onTap,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
       decoration: BoxDecoration(
-        // borderRadius: BorderRadius.circular(40), // Mueve el borderRadius aquí
-        // border: Border.all(
-        //   color: const Color.fromARGB(255, 11, 11, 11), // Color del borde
-        //   width: 0.5, // Ancho del borde
-        // ),
         boxShadow: [
           BoxShadow(
             color: Theme.of(context).shadowColor,
             spreadRadius: 0,
             blurRadius: 20,
-            offset: const Offset(0, 0), // changes position of shadow
+            offset: const Offset(0, 0),
           ),
         ],
       ),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(40),
         child: BottomNavigationBar(
-          backgroundColor:
-              Theme.of(
-                context,
-              ).colorScheme.secondary, //Para que tome el color del tema
+          backgroundColor: Theme.of(context).colorScheme.secondary,
           showSelectedLabels: true,
           showUnselectedLabels: true,
           type: BottomNavigationBarType.fixed,
           selectedItemColor: Theme.of(context).primaryColor,
           unselectedItemColor: Colors.blueGrey,
-          items: const <BottomNavigationBarItem>[
+          items: const [
             BottomNavigationBarItem(icon: Icon(Icons.home_filled), label: 'Home'),
             BottomNavigationBarItem(icon: Icon(Icons.notifications_rounded), label: 'Alertas'),
-            BottomNavigationBarItem(icon: Icon(Icons.bar_chart), label: 'analytics'),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.settings),
-              label: 'Settings',
-            ),
+            BottomNavigationBarItem(icon: Icon(Icons.bar_chart), label: 'Analytics'),
+            BottomNavigationBarItem(icon: Icon(Icons.settings), label: 'Settings'),
           ],
-          currentIndex: _selectedIndex,
-          onTap: _onItemTapped,
+          currentIndex: currentIndex,
+          onTap: onTap,
         ),
       ),
     );

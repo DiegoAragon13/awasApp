@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:awas_app/Pages/home.dart';
+import 'package:awas_app/Pages/Navigation/navigationForPages.dart';
 
 class Splash extends StatefulWidget {
   const Splash({super.key});
@@ -55,7 +56,7 @@ class _SplashState extends State<Splash> with SingleTickerProviderStateMixin {
         Navigator.pushReplacement(
           context,
           PageRouteBuilder(
-            pageBuilder: (_, __, ___) => const Home(),
+            pageBuilder: (_, __, ___) => const navigationForPages(),
             transitionDuration: const Duration(milliseconds: 800),
             transitionsBuilder: (_, animation, __, child) {
               return FadeTransition(
