@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:awas_app/Pages/home.dart';
 import 'package:awas_app/Pages/alerts.dart';
 import 'package:awas_app/Pages/analytics.dart';
-import 'package:awas_app/Pages/ajustes.dart';
+import 'package:awas_app/Pages/settings.dart';
 
 import 'package:awas_app/widgets/app_bar_widget.dart';
 import 'package:awas_app/widgets/bottom_bar_widget.dart';

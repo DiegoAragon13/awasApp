@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:awas_app/widgets/CardsAjustes.dart';
+import 'package:awas_app/widgets/settings_cards_widget.dart';
 import 'package:provider/provider.dart';
 import 'package:awas_app/providers/theme_provider.dart';
 
