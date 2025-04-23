@@ -24,7 +24,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           fontSize: 22,
         ),
       ),
-      centerTitle: false, // 👈 Título alineado a la izquierda
+      centerTitle: false,
       backgroundColor: backgroundColor ?? theme.primaryColor,
       foregroundColor: foregroundColor ?? Colors.white,
       actions: [

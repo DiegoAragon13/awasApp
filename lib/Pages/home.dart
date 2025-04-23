@@ -1,11 +1,6 @@
 import 'package:flutter/material.dart';
 
 
-import 'package:awas_app/Pages/alerts.dart';
-import 'package:awas_app/Pages/analytics.dart';
-import 'package:awas_app/Pages/ajustes.dart';
-
-// HomePage separado como widget
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
