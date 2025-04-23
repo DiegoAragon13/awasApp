@@ -15,6 +15,7 @@ class ThemeApp {
     colorScheme: const ColorScheme.light(
       primary: Color(0xFF213555),
       secondary: Color.fromARGB(255, 255, 255, 255), // Color más claro que el scaffold
+      tertiary: Color.fromARGB(44, 33, 53, 85),
     ),
     textTheme: TextTheme(
       bodyLarge: TextStyle(
@@ -37,16 +38,12 @@ class ThemeApp {
     fontFamily: GoogleFonts.poppins().fontFamily,
     brightness: Brightness.dark,
     primaryColor: const Color(0xFF213555),
-    scaffoldBackgroundColor: const Color.fromARGB(255, 6, 6, 6),
+    scaffoldBackgroundColor: const Color.fromARGB(255, 14, 14, 14),
     shadowColor: const Color.fromARGB(39, 7, 7, 13),
     colorScheme: const ColorScheme.dark(
       primary: Color(0xFF213555),
-      secondary: Color.fromARGB(
-        255,
-        9,
-        9,
-        9,
-      ), // Color más claro que el scaffold
+      secondary: Color.fromARGB(255, 21, 21, 21), // Color más claro que el scaffold
+      tertiary: Color.fromARGB(255, 255, 255, 255),
     ),
     textTheme: TextTheme(
       bodyLarge: TextStyle(
