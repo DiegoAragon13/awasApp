@@ -1,3 +1,4 @@
+import 'package:awas_app/providers/segmented_control_provider.dart';
 import 'package:awas_app/utils/themes/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -6,10 +7,12 @@ import 'providers/theme_provider.dart';
 
 void main() {
   runApp(
-    ChangeNotifierProvider(
-      create: (context) => ThemeProvider(),
-      child: const MyApp(),
-    ),
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => ThemeProvider()),
+        ChangeNotifierProvider(create: (_) => SegmentedControlProvider()),
+      ],
+      child: const MyApp()),
   );
 }
 

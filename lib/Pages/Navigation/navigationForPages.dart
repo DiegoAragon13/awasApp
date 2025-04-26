@@ -21,7 +21,6 @@ class navigationForPages extends StatefulWidget {
 class _navigationForPagesState extends State<navigationForPages> {
   int _currentIndex = 0;
 
-  // Lista de páginas
   final List<Widget> _pages = [
     const HomePage(),
     const Alerts(),
@@ -39,7 +38,13 @@ class _navigationForPagesState extends State<navigationForPages> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const CustomAppBar(notificationCount: 3),
-      body: _pages[_currentIndex],
+      
+      // 👇 Aquí cambias body por IndexedStack
+      body: IndexedStack(
+        index: _currentIndex,
+        children: _pages,
+      ),
+      
       bottomNavigationBar: BottomBarWidget(
         currentIndex: _currentIndex,
         onTap: _onItemTapped,
