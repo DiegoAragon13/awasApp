@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'Pages/splash.dart';
 import 'providers/theme_provider.dart';
+import 'package:awas_app/providers/AlertsProvider.dart';
 
 void main() {
   runApp(
@@ -11,6 +12,8 @@ void main() {
       providers: [
         ChangeNotifierProvider(create: (_) => ThemeProvider()),
         ChangeNotifierProvider(create: (_) => SegmentedControlProvider()),
+        ChangeNotifierProvider(create: (_) => AlertsProvider()),
+      //  ChangeNotifierProvider(create: (_) => AnalyticsProvider()),
       ],
       child: const MyApp()),
   );
