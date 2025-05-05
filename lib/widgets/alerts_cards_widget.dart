@@ -1,3 +1,4 @@
+import 'package:awas_app/utils/formatters/alert_datetime_formatter.dart';
 import 'package:flutter/material.dart';
 import 'package:awas_app/providers/AlertsProvider.dart';
 
@@ -27,13 +28,40 @@ class AlertsCardsWidget extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(alert.message),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // Icon(Icons.warning, color: Colors.red),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        alert.message,
+                        style: theme.textTheme.titleMedium?.copyWith(
+                          fontWeight: FontWeight.bold,
+                          // color: theme.colorScheme.primary
+                        ),
+                      ),
+                      SizedBox(height: 8),
+                      Text(
+                        alert.location,
+                        style: theme.textTheme.titleSmall?.copyWith(
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(alert.timestamp.toString()),
-                  ElevatedButton(onPressed: () {
-                  }, child: Text('Borrar')),
+                  Text(
+                    AlertDateTimeFormatter.format(alert.timestamp),
+                    style: theme.textTheme.bodySmall,
+                  ),
+                  ElevatedButton(onPressed: () {}, child: Text('Borrar')),
                 ],
               ),
             ],

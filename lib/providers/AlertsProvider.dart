@@ -4,13 +4,15 @@ class Alert {
   final String type; // 'Gas', 'Agua', 'Intrusos'
   final String message;
   final DateTime timestamp;
-  final String severity; // 'Alto', 'Medio', 'Bajo'
+  final String severity; // 'Alto', 'Medio', 'Bajo'   // TODO: Funciona mejor un enum
+  final String location; 
 
   Alert({
     required this.type,
     required this.message,
     required this.timestamp,
     required this.severity,
+    required this.location,
   });
 }
 
@@ -26,6 +28,7 @@ class AlertsProvider extends ChangeNotifier {
         message: 'Nivel de gas elevado detectado',
         timestamp: DateTime.now().subtract(const Duration(hours: 2)),
         severity: 'Alto',
+        location: 'Cocina'
       ),
     );
     _alerts.add(
@@ -34,6 +37,7 @@ class AlertsProvider extends ChangeNotifier {
         message: 'Posible fuga de agua detectada',
         timestamp: DateTime.now().subtract(const Duration(hours: 5)),
         severity: 'Medio',
+        location: 'Puerta principal'
       ),
     );
     _alerts.add(
@@ -42,6 +46,7 @@ class AlertsProvider extends ChangeNotifier {
         message: 'Movimiento detectado cuando no hay nadie en casa',
         timestamp: DateTime.now().subtract(const Duration(days: 1)),
         severity: 'Alto',
+        location: 'Puerta trasera'
       ),
     );
   }
