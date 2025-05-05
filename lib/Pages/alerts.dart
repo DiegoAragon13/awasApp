@@ -18,32 +18,56 @@ class _AlertsState extends State<Alerts> {
     final theme = Theme.of(context);
     // Ya no usamos Provider.of aquí para los datos
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            ScreenTitle(theme: theme),
-            SegmentedControlWidget(),
-            Expanded(
-              child: Consumer2<AlertsProvider, SegmentedControlProvider>(
-                builder: (context, providerAlerts, providerSegmentedControl, _) {
-                  final filteredAlerts = providerAlerts.getFilteredAlerts(providerSegmentedControl.filters);
-                  return ListView.builder(
-                    itemCount: filteredAlerts.length,
-                    itemBuilder: (context, index) {
-                      return AlertsCardsWidget(
-                        alert: filteredAlerts[index],
-                      );
-                    },
-                  );
-                },
+  body: SafeArea(
+    child: Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              ScreenTitle(theme: theme),
+              SegmentedControlWidget(),
+              Align(
+                alignment: Alignment.centerRight,
+                child: TextButton(
+                  child: Text(
+                    'Vaciar alertas',
+                    style: theme.textTheme.bodySmall?.copyWith(
+                      decoration: TextDecoration.underline,
+                    )
+                  ),
+                  onPressed: () {
+                    // Lógica para vaciar las alertas
+                    final providerAlerts = Provider.of<AlertsProvider>(context, listen: false);
+                    providerAlerts.clearAlerts();
+                  },
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
-      ),
-    );
+        Expanded(
+          child: Consumer2<AlertsProvider, SegmentedControlProvider>(
+            builder: (context, providerAlerts, providerSegmentedControl, _) {
+              final filteredAlerts = providerAlerts.getFilteredAlerts(
+                providerSegmentedControl.filters,
+              );
+              return ListView.builder(
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                itemCount: filteredAlerts.length,
+                itemBuilder: (context, index) {
+                  return AlertsCardsWidget(alert: filteredAlerts[index]);
+                },
+              );
+            },
+          ),
+        ),
+      ],
+    ),
+  ),
+);
+
   }
 }
 
