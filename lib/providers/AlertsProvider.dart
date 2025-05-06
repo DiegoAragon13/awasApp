@@ -1,16 +1,20 @@
 import 'package:flutter/material.dart';
 
 class Alert {
+  final int id; // ID de la alerta
   final String type; // 'Gas', 'Agua', 'Intrusos'
   final String message;
   final DateTime timestamp;
-  final String severity; // 'Alto', 'Medio', 'Bajo'
+  final String severity; // 'Alto', 'Medio', 'Bajo'   // TODO: Funciona mejor un enum
+  final String location; 
 
   Alert({
+    required this.id,
     required this.type,
     required this.message,
     required this.timestamp,
     required this.severity,
+    required this.location,
   });
 }
 
@@ -22,26 +26,32 @@ class AlertsProvider extends ChangeNotifier {
     // Agregue algunas alertas de prueba xd
     _alerts.add(
       Alert(
+        id: 1,
         type: 'Gas',
         message: 'Nivel de gas elevado detectado',
         timestamp: DateTime.now().subtract(const Duration(hours: 2)),
         severity: 'Alto',
+        location: 'Cocina'
       ),
     );
     _alerts.add(
       Alert(
+        id: 2,
         type: 'Agua',
         message: 'Posible fuga de agua detectada',
         timestamp: DateTime.now().subtract(const Duration(hours: 5)),
         severity: 'Medio',
+        location: 'Puerta principal'
       ),
     );
     _alerts.add(
       Alert(
+        id: 3,
         type: 'Intrusos',
         message: 'Movimiento detectado cuando no hay nadie en casa',
         timestamp: DateTime.now().subtract(const Duration(days: 1)),
         severity: 'Alto',
+        location: 'Puerta trasera'
       ),
     );
   }
@@ -87,6 +97,11 @@ class AlertsProvider extends ChangeNotifier {
   // Limpiar todas las alertas
   void clearAlerts() {
     _alerts.clear();
+    notifyListeners();
+  }
+
+  void removeAlert(int id) {
+    _alerts.removeWhere((alert) => alert.id == id);
     notifyListeners();
   }
 }
