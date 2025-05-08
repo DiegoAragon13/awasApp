@@ -39,7 +39,7 @@ class AlertsCardsWidget extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         SizedBox(
-                          width: 300,
+                          width: 250,
                           child: Text(
                             alert.message,
                             style: theme.textTheme.titleMedium?.copyWith(
