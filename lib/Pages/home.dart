@@ -1,34 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:awas_app/widgets/system_panel_home.dart';
+import '../providers/AlertsProvider.dart';
 import '../widgets/alert_home.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
-
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    // Usamos ValueNotifier para manejar el estado en un StatelessWidget
     final panelEnabled = ValueNotifier<bool>(true);
 
-    final List<Map<String, dynamic>> alerts = [
-      {
-        'icon': Icons.motion_photos_on,
-        'title': 'Detección de movimiento',
-        'time': 'Hoy, 10:23 AM'
-      },
-      {
-        'icon': Icons.water_drop,
-        'title': 'Nivel de agua alto',
-        'time': 'Hoy, 10:23 AM'
-      },
-      {
-        'icon': Icons.gas_meter,
-        'title': 'Detección de gas',
-        'time': 'Hoy, 10:23 AM'
-      },
-    ];
+    // Obtenemos el provider
+    final alertsProvider = Provider.of<AlertsProvider>(context);
+
+    // Filtramos solo las alertas recientes (últimas 24 horas)
+    final recentAlerts = alertsProvider.alerts.where(
+          (alert) => alert.timestamp.isAfter(DateTime.now().subtract(const Duration(hours: 24))),
+    ).toList();
 
     return Scaffold(
       body: SafeArea(
@@ -36,7 +26,7 @@ class HomePage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Toggle y panel en un ValueListenableBuilder
+              // Toggle y panel
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                 child: ValueListenableBuilder<bool>(
@@ -59,7 +49,7 @@ class HomePage extends StatelessWidget {
                 ),
               ),
 
-              // SystemPanel solo cuando panelEnabled = true
+              // Mostrar el panel si está activado
               ValueListenableBuilder<bool>(
                 valueListenable: panelEnabled,
                 builder: (context, enabled, _) {
@@ -80,22 +70,33 @@ class HomePage extends StatelessWidget {
                 ),
               ),
 
-              // Lista de alertas
-              ListView.separated(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                itemCount: alerts.length,
-                separatorBuilder: (_, __) => const SizedBox(height: 12),
-                itemBuilder: (context, index) {
-                  final alert = alerts[index];
-                  return AlertCard(
-                    icon: alert['icon'] as IconData,
-                    title: alert['title'] as String,
-                    time: alert['time'] as String,
-                  );
-                },
-              ),
+              // Lista de alertas recientes
+              if (recentAlerts.isNotEmpty)
+                ListView.separated(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  itemCount: recentAlerts.length,
+                  separatorBuilder: (_, __) => const SizedBox(height: 12),
+                  itemBuilder: (context, index) {
+                    final alert = recentAlerts[index];
+                    return AlertCard(
+                      icon: alert.type == 'Gas'
+                          ? Icons.gas_meter
+                          : alert.type == 'Agua'
+                          ? Icons.water_drop
+                          : Icons.motion_photos_on,
+                      title: alert.message,
+                      time:
+                      '${alert.timestamp.hour.toString().padLeft(2, '0')}:${alert.timestamp.minute.toString().padLeft(2, '0')} - ${alert.location}',
+                    );
+                  },
+                )
+              else
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: Text('No hay alertas recientes.'),
+                ),
 
               const SizedBox(height: 80),
             ],
@@ -105,6 +106,3 @@ class HomePage extends StatelessWidget {
     );
   }
 }
-
-
-
