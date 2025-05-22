@@ -42,7 +42,7 @@ class ThemeApp {
     shadowColor: const Color.fromARGB(39, 7, 7, 13),
     colorScheme: const ColorScheme.dark(
       primary: Color(0xFF213555),
-      secondary: Color.fromARGB(255, 21, 21, 21), // Color más claro que el scaffold
+      secondary: Color.fromARGB(255, 40, 40, 40), // Color más claro que el scaffold
       tertiary: Color.fromARGB(255, 255, 255, 255),
     ),
     textTheme: TextTheme(
