@@ -125,11 +125,14 @@ class AnalyticsStatsWidget extends StatelessWidget {
                       ),
                       margin: const EdgeInsets.only(right: 8),
                     ),
-                    Text(
-                      riskLevel,
-                      style: theme.textTheme.headlineMedium?.copyWith(
-                        fontWeight: FontWeight.bold,
-                        color: riskColor,
+                    Flexible(
+                      child: Text(
+                        riskLevel,
+                        style: theme.textTheme.headlineMedium?.copyWith(
+                          fontWeight: FontWeight.bold,
+                          color: riskColor,
+                        ),
+                        overflow: TextOverflow.ellipsis,
                       ),
                     ),
                   ],

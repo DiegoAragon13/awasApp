@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:awas_app/Pages/Navigation/navigationForPages.dart';
 
@@ -8,6 +9,7 @@ class Splash extends StatefulWidget {
   @override
   State<Splash> createState() => _SplashState();
 }
+
 
 class _SplashState extends State<Splash> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
@@ -20,6 +22,7 @@ class _SplashState extends State<Splash> with SingleTickerProviderStateMixin {
   void initState() {
     super.initState();
 
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
     _controller = AnimationController(
       duration: const Duration(milliseconds: 3500),
       vsync: this,
@@ -62,6 +65,7 @@ class _SplashState extends State<Splash> with SingleTickerProviderStateMixin {
     // Navegar a la siguiente pantalla después de completar la animación
     WidgetsBinding.instance.addPostFrameCallback((_) {
       Future.delayed(const Duration(milliseconds: 4000), () {
+        SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
         Navigator.pushReplacement(
           context,
           PageRouteBuilder(
