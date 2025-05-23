@@ -1,3 +1,4 @@
+import 'package:awas_app/providers/panel_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:awas_app/providers/segmented_control_provider.dart';
@@ -7,6 +8,7 @@ import 'package:awas_app/providers/theme_provider.dart';
 import 'package:awas_app/providers/AlertsProvider.dart';
 
 
+import 'Services/gemini_service.dart';
 import 'firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
 
@@ -16,13 +18,18 @@ Future<void> main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
+  GeminiService.initialize();
+
+
   runApp(
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => ThemeProvider()),
         ChangeNotifierProvider(create: (_) => SegmentedControlProvider()),
         ChangeNotifierProvider(create: (_) => AlertsProvider()),
+        ChangeNotifierProvider(create: (_) => PanelProvider()),
         // ChangeNotifierProvider(create: (_) => AnalyticsProvider()),
+
       ],
       child: const MyApp(),
     ),

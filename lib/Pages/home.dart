@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:awas_app/providers/panel_provider.dart';
 import 'package:awas_app/widgets/system_panel_home.dart';
 import '../providers/AlertsProvider.dart';
 import '../widgets/alert_home.dart';
@@ -10,12 +11,9 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final panelEnabled = ValueNotifier<bool>(true);
-
-    // Obtenemos el provider
+    final panelProvider = Provider.of<PanelProvider>(context);
     final alertsProvider = Provider.of<AlertsProvider>(context);
 
-    // Filtramos solo las alertas recientes (últimas 24 horas)
     final recentAlerts = alertsProvider.alerts.where(
           (alert) => alert.timestamp.isAfter(DateTime.now().subtract(const Duration(hours: 24))),
     ).toList();
@@ -29,37 +27,27 @@ class HomePage extends StatelessWidget {
               // Toggle y panel
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-                child: ValueListenableBuilder<bool>(
-                  valueListenable: panelEnabled,
-                  builder: (context, enabled, _) {
-                    return Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          'Panel',
-                          style: theme.textTheme.headlineSmall,
-                        ),
-                        Switch(
-                          value: enabled,
-                          onChanged: (value) => panelEnabled.value = value,
-                        ),
-                      ],
-                    );
-                  },
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Panel',
+                      style: theme.textTheme.headlineSmall,
+                    ),
+                    Switch(
+                      value: panelProvider.isPanelEnabled,
+                      onChanged: (value) => panelProvider.togglePanel(value),
+                    ),
+                  ],
                 ),
               ),
 
               // Mostrar el panel si está activado
-              ValueListenableBuilder<bool>(
-                valueListenable: panelEnabled,
-                builder: (context, enabled, _) {
-                  if (!enabled) return const SizedBox.shrink();
-                  return Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    child: SystemPanel(enabled: true),
-                  );
-                },
-              ),
+              if (panelProvider.isPanelEnabled)
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: const SystemPanel(enabled: true),
+                ),
 
               // Título de alertas
               Padding(
