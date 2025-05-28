@@ -7,9 +7,6 @@ import 'package:awas_app/Pages/settings.dart';
 import 'package:awas_app/widgets/app_bar_widget.dart';
 import 'package:awas_app/widgets/bottom_bar_widget.dart';
 
-
-
-
 // Main container que usa BottomBarWidget
 class navigationForPages extends StatefulWidget {
   const navigationForPages({super.key});
@@ -37,14 +34,11 @@ class _navigationForPagesState extends State<navigationForPages> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAppBar(notificationCount: 3),
-      
-      // 👇 Aquí cambias body por IndexedStack
+      appBar: const CustomAppBar(), // ← ya no se le pasa notificationCount
       body: IndexedStack(
         index: _currentIndex,
         children: _pages,
       ),
-      
       bottomNavigationBar: BottomBarWidget(
         currentIndex: _currentIndex,
         onTap: _onItemTapped,

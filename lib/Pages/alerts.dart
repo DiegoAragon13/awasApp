@@ -82,7 +82,6 @@ class ScreenTitle extends StatelessWidget {
       children: [
         const SizedBox(height: 30),
         Text('Alertas', style: theme.textTheme.headlineSmall),
-        const SizedBox(height: 30),
       ],
     );
   }

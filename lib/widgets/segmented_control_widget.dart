@@ -16,44 +16,46 @@ class _SegmentedControlWidgetState extends State<SegmentedControlWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        ButtonWidget(label: 'Gas'),
-        const SizedBox(width: 8),
-        ButtonWidget(label: 'Agua'),
-        const SizedBox(width: 8),
-        ButtonWidget(label: 'Intrusos'),
-      ],
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: Row(
+        children: [
+          ButtonWidget(label: 'Gas'),
+          const SizedBox(width: 8),
+          ButtonWidget(label: 'Agua'),
+          const SizedBox(width: 8),
+          ButtonWidget(label: 'Intrusos'),
+          const SizedBox(width: 8),
+          ButtonWidget(label: "Temperatura"),
+        ],
+      ),
     );
   }
+
 }
 
-class ButtonWidget extends StatefulWidget {
-  final String label; 
-  
+class ButtonWidget extends StatelessWidget {
+  final String label;
+
   const ButtonWidget({
-    super.key, required this.label,
+    super.key,
+    required this.label,
   });
-
-  @override
-  State<ButtonWidget> createState() => _ButtonWidgetState();
-}
-
-class _ButtonWidgetState extends State<ButtonWidget> {
-  bool isSelected = false;
-  
 
   @override
   Widget build(BuildContext context) {
     final providerFilters = Provider.of<SegmentedControlProvider>(context);
-    return FilterChip(label: Text(widget.label), onSelected: (bool value) {
-          // Handle selection
-          setState(() {
-            isSelected = !isSelected;
-            isSelected ? providerFilters.addFilter(widget.label) : providerFilters.removeFilter(widget.label);
-          });
-        },
-        selected: isSelected,
-        selectedColor: Theme.of(context).colorScheme.tertiary);
+    final isSelected = providerFilters.isSelected(label);
+
+    return FilterChip(
+      label: Text(label),
+      onSelected: (bool selected) {
+        selected
+            ? providerFilters.addFilter(label)
+            : providerFilters.removeFilter(label);
+      },
+      selected: isSelected,
+      selectedColor: Theme.of(context).colorScheme.tertiary,
+    );
   }
 }

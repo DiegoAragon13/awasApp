@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "657280713311",
+    "project_id": "awasapp-987a5",
+    "storage_bucket": "awasapp-987a5.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:657280713311:android:47609051d27acc0ba0d1ea",
+        "android_client_info": {
+          "package_name": "com.example.awas_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAqvyeZaf0ah7oKrsZE_-uJDcGKFHajvPk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
