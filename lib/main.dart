@@ -6,7 +6,11 @@ import 'package:awas_app/utils/themes/theme.dart';
 import 'package:awas_app/Pages/splash.dart';
 import 'package:awas_app/providers/theme_provider.dart';
 import 'package:awas_app/providers/AlertsProvider.dart';
+import 'package:awas_app/providers/contact_provider.dart';
 
+import 'package:awas_app/Services/NotificationService.dart';
+import 'package:awas_app/Services/BackgroundTaskHandler.dart';
+import 'package:timezone/data/latest_all.dart' as tz;
 
 import 'Services/gemini_service.dart';
 import 'firebase_options.dart';
@@ -20,6 +24,9 @@ Future<void> main() async {
 
   GeminiService.initialize();
 
+  // Inicializar notificaciones y zona horaria
+  tz.initializeTimeZones();
+  await NotificationService().initialize();
 
   runApp(
     MultiProvider(
@@ -28,8 +35,7 @@ Future<void> main() async {
         ChangeNotifierProvider(create: (_) => SegmentedControlProvider()),
         ChangeNotifierProvider(create: (_) => AlertsProvider()),
         ChangeNotifierProvider(create: (_) => PanelProvider()),
-        // ChangeNotifierProvider(create: (_) => AnalyticsProvider()),
-
+        ChangeNotifierProvider(create: (_) => ContactProvider()),
       ],
       child: const MyApp(),
     ),
@@ -48,9 +54,39 @@ class MyApp extends StatelessWidget {
           themeMode: themeProvider.themeMode,
           theme: ThemeApp.lightTheme,
           darkTheme: ThemeApp.darktTheme,
-          home: const Splash(),
+          home: const AppLifecycleWrapper(),
         );
       },
     );
+  }
+}
+
+class AppLifecycleWrapper extends StatefulWidget {
+  const AppLifecycleWrapper({super.key});
+
+  @override
+  State<AppLifecycleWrapper> createState() => _AppLifecycleWrapperState();
+}
+
+class _AppLifecycleWrapperState extends State<AppLifecycleWrapper> {
+  final AppLifecycleManager _lifecycleManager = AppLifecycleManager();
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(_lifecycleManager);
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(_lifecycleManager);
+    _lifecycleManager.dispose();
+    NotificationService().dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return const Splash();
   }
 }

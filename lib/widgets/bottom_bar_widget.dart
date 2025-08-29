@@ -12,12 +12,17 @@ class BottomBarWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final isDarkMode = theme.brightness == Brightness.dark;
+    final unselectedIconColor = isDarkMode ? const Color(0xFFF8F0E9) : Colors.blueGrey;
+    final selectedIconColor = isDarkMode ? const Color(0xFFF8F0E9) : theme.colorScheme.primary;
+
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
       decoration: BoxDecoration(
         boxShadow: [
           BoxShadow(
-            color: Theme.of(context).shadowColor,
+            color: theme.shadowColor,
             spreadRadius: 0,
             blurRadius: 20,
             offset: const Offset(0, 0),
@@ -27,12 +32,12 @@ class BottomBarWidget extends StatelessWidget {
       child: ClipRRect(
         borderRadius: BorderRadius.circular(40),
         child: BottomNavigationBar(
-          backgroundColor: Theme.of(context).colorScheme.secondary,
+          backgroundColor: theme.colorScheme.secondary,
           showSelectedLabels: true,
           showUnselectedLabels: true,
           type: BottomNavigationBarType.fixed,
-          selectedItemColor: Theme.of(context).primaryColor,
-          unselectedItemColor: Colors.blueGrey,
+          selectedItemColor: selectedIconColor,
+          unselectedItemColor: unselectedIconColor,
           items: const [
             BottomNavigationBarItem(icon: Icon(Icons.home_filled), label: 'Home'),
             BottomNavigationBarItem(icon: Icon(Icons.notifications_rounded), label: 'Alertas'),
