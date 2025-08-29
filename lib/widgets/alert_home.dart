@@ -12,7 +12,7 @@ class AlertCard extends StatelessWidget {
     final isDark = theme.brightness == Brightness.dark;
     final background = isDark ? theme.colorScheme.secondary: const Color(0xFFF8F0E9);
     final iconColor = isDark ? const Color(0xFFF8F0E9) : theme.primaryColor;
-
+//cambio loco
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
