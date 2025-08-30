@@ -54,7 +54,7 @@ class GeminiService {
       context.writeln('\\n$type (${typeAlerts.length} alertas):');
       for (var alert in typeAlerts.take(3)) { // Máximo 3 por tipo para no saturar
         final timeAgo = _getTimeAgo(alert.timestamp);
-        context.writeln('- ${alert.message} (${alert.severity}, ${alert.location}, $timeAgo)');
+        context.writeln('- ${alert.message} (${alert.severity},S}, $timeAgo)');
       }
     });
 

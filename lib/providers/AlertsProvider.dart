@@ -8,7 +8,6 @@ class Alert {
   final String message;
   final DateTime timestamp;
   final String severity; // 'Alto', 'Medio', 'Bajo'
-  final String location;
 
   Alert({
     required this.id,
@@ -16,7 +15,6 @@ class Alert {
     required this.message,
     required this.timestamp,
     required this.severity,
-    required this.location,
   });
 
   @override
@@ -115,7 +113,6 @@ class AlertsProvider extends ChangeNotifier {
           message: 'Nivel de gas elevado detectado',
           timestamp: timestamp,
           severity: 'Alto',
-          location: 'Cocina',
         ));
       }
 
@@ -128,7 +125,6 @@ class AlertsProvider extends ChangeNotifier {
           message: 'Movimiento detectado cuando no hay nadie en casa',
           timestamp: timestamp,
           severity: 'Alto',
-          location: 'Puerta trasera',
         ));
       }
 
@@ -140,7 +136,6 @@ class AlertsProvider extends ChangeNotifier {
           message: 'Temperatura elevada detectada',
           timestamp: timestamp,
           severity: 'Medio',
-          location: 'Sala de estar',
         ));
       }
 
@@ -152,7 +147,6 @@ class AlertsProvider extends ChangeNotifier {
           message: 'Nivel de agua elevado detectado',
           timestamp: timestamp,
           severity: 'Alto',
-          location: 'Sótano',
         ));
       }
     }
@@ -199,6 +193,7 @@ class AlertsProvider extends ChangeNotifier {
     super.dispose();
   }
 }
+
 // Agregar estas clases auxiliares al final del archivo, antes del AlertsProvider
 
 class RiskAnalyzer {
@@ -242,9 +237,6 @@ class RiskAnalyzer {
       final timeMultiplier = _getTimeMultiplier(alert.timestamp);
       alertRisk *= timeMultiplier;
 
-      // Bonificación por ubicación crítica
-      alertRisk += _getLocationRiskBonus(alert.location, alert.type);
-
       totalRiskScore += alertRisk;
     }
 
@@ -268,31 +260,6 @@ class RiskAnalyzer {
     if (difference.inHours <= 2) return 1.2;    // Relativamente reciente
     if (difference.inHours <= 6) return 1.0;    // Normal
     return 0.7; // Más antigua, menos crítica
-  }
-
-  // Bonificación de riesgo por ubicación
-  static double _getLocationRiskBonus(String location, String alertType) {
-    final Map<String, Map<String, double>> locationRisks = {
-      'Cocina': {
-        'Gas': 2.0,        // Gas en cocina es muy peligroso
-        'Temperatura': 1.5, // Sobrecalentamiento en cocina
-        'Agua': 1.0,       // Filtración en cocina
-      },
-      'Sótano': {
-        'Agua': 2.0,       // Inundación en sótano es crítica
-        'Gas': 1.5,        // Gas acumulado en sótano
-        'Intrusos': 1.0,   // Acceso por sótano
-      },
-      'Puerta trasera': {
-        'Intrusos': 2.0,   // Intrusión por puerta trasera
-      },
-      'Sala de estar': {
-        'Temperatura': 1.0, // Sobrecalentamiento general
-        'Intrusos': 1.5,   // Intrusos en área principal
-      },
-    };
-
-    return locationRisks[location]?[alertType] ?? 0.0;
   }
 
   // Analizar combinaciones peligrosas
@@ -326,4 +293,3 @@ class RiskAnalyzer {
     return combinationBonus;
   }
 }
-

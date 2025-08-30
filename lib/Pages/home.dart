@@ -76,7 +76,7 @@ class HomePage extends StatelessWidget {
                           : Icons.motion_photos_on,
                       title: alert.message,
                       time:
-                      '${alert.timestamp.hour.toString().padLeft(2, '0')}:${alert.timestamp.minute.toString().padLeft(2, '0')} - ${alert.location}',
+                      '${alert.timestamp.hour.toString().padLeft(2, '0')}:${alert.timestamp.minute.toString().padLeft(2, '0')}',
                     );
                   },
                 )

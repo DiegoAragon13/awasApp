@@ -51,12 +51,7 @@ class AlertsCardsWidget extends StatelessWidget {
                           ),
                         ),
                         SizedBox(height: 8),
-                        Text(
-                          alert.location,
-                          style: theme.textTheme.titleSmall?.copyWith(
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
+
                       ],
                     ),
                   ],
