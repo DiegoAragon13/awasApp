@@ -1,16 +1,30 @@
-# awas_app
+AWAS - Autonomous Security System
+Overview
 
-awas
+AWAS is an intelligent, autonomous security system created for the Innovatec National Innovation Summit (Cumbre Nacional de Innovación “Innovatec”) of TecNM, competing in the local stage. It is designed to protect homes and businesses without requiring an internet connection. AWAS prioritizes privacy while monitoring threats such as intrusions, gas leaks, and fires, ensuring continuous operation even offline.
 
-## Getting Started
+Key Features
 
-This project is a starting point for a Flutter application.
+Offline Functionality: Operates independently without internet connectivity.
 
-A few resources to get you started if this is your first Flutter project:
+Intrusion Detection: Identifies unauthorized access in real time.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+Environmental Safety: Detects gas leaks and potential fire hazards.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+User Privacy: Focused on keeping user data private and secure.
+
+Scalability: Adaptable for both homes and businesses.
+
+Credits
+
+Developed by:
+
+-Diego Felipe Aragón Garcia
+-Dulce Carolina Niebla Soto
+-Jemima Reyes Macias
+-Diego Alejando Niebla Soto
+-Andrea Michelle de la Fuente Garcia 
+
+License
+
+This project is for educational and research purposes. Please contact the authors for further permissions.
