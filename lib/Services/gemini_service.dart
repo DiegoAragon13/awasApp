@@ -3,7 +3,7 @@ import 'package:flutter_gemini/flutter_gemini.dart';
 import '../providers/AlertsProvider.dart';
 
 class GeminiService {
-  static const String _apiKey = 'AIzaSyBpKE8T8J-PIFlg2cUtWCBBBfSCzYHIkWk';
+  static const String _apiKey = 'AIzaSyB TU API KEY ';
   static Gemini? _instance;
 
   static void initialize() {
